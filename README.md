@@ -76,13 +76,13 @@ See `CLAUDE.md` for detailed architecture documentation.
 
 ## Project Status
 
-**Current Phase**: Phase 1 (MVP)
+**Current Phase**: Phase 1 (MVP) - ✅ COMPLETED
 
-- [ ] CPU collector
-- [ ] Memory collector
-- [ ] Local file storage
-- [ ] CLI output
-- [ ] Basic alerts
+- [x] CPU collector (9 metrics)
+- [x] Memory collector (11 metrics)
+- [x] Local file storage (JSON Lines format)
+- [x] CLI output (color-coded display)
+- [x] Basic alerts (threshold-based with duration tracking)
 
 ## Contributing
 
