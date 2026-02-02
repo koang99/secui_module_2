@@ -20,11 +20,36 @@
                               [알림 시스템]
 ```
 
-**기술 스택 옵션:**
-- **에이전트**: Python (psutil), Go (gopsutil), 또는 Node.js (systeminformation)
-- **저장소**: Prometheus, InfluxDB, 또는 TimescaleDB
-- **시각화**: Grafana, Kibana, 또는 커스텀 React 대시보드
-- **알림**: Prometheus Alertmanager, PagerDuty, 또는 Slack/Discord 웹훅
+## 기술 스택
+
+**선택된 기술 스택:**
+- **에이전트**: Python 3.9+ with psutil
+  - 간단하고 빠른 프로토타이핑
+  - psutil을 통한 크로스 플랫폼 시스템 메트릭 수집
+  - 풍부한 라이브러리 생태계
+- **저장소**: Prometheus
+  - 시계열 데이터에 특화된 TSDB
+  - Pull 기반 메트릭 수집
+  - PromQL을 통한 강력한 쿼리 기능
+  - 자동 데이터 압축 및 보존 정책
+- **시각화**: Grafana
+  - Prometheus와 네이티브 통합
+  - 풍부한 시각화 옵션 및 대시보드 템플릿
+  - 알림 규칙 및 대시보드 공유 기능
+- **알림**: Prometheus Alertmanager
+  - Prometheus와 완벽한 통합
+  - 알림 라우팅, 그룹화, 중복 제거
+  - 여러 채널 지원 (이메일, Slack, PagerDuty, 웹훅)
+
+**추가 의존성:**
+- **Python 라이브러리**:
+  - `psutil` - 시스템 및 프로세스 메트릭 수집
+  - `prometheus-client` - Prometheus exporter
+  - `pyyaml` - 설정 파일 파싱
+  - `requests` - HTTP 클라이언트
+- **인프라**:
+  - Docker & Docker Compose - 컨테이너화 및 로컬 개발
+  - Systemd - 프로덕션 환경 서비스 관리
 
 ## 디렉토리 구조
 
