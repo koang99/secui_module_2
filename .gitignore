@@ -51,6 +51,9 @@ config/*.env
 *.key
 *.pem
 
+# Claude Code
+.claude/
+
 # Logs
 logs/
 *.log

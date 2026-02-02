@@ -1,0 +1,98 @@
+# System Resource Metrics Collection Configuration
+
+# Agent settings
+agent:
+  hostname: "localhost"
+  collection_interval: 10  # seconds
+  export_port: 8000
+
+# Collectors configuration
+collectors:
+  cpu:
+    enabled: true
+    interval: 10  # seconds
+    per_core: true
+
+  memory:
+    enabled: true
+    interval: 10  # seconds
+
+  disk_io:
+    enabled: true
+    interval: 10  # seconds
+    devices: []  # empty list = all devices
+
+  network:
+    enabled: true
+    interval: 10  # seconds
+    interfaces: []  # empty list = all interfaces
+
+  disk_usage:
+    enabled: true
+    interval: 60  # seconds
+    mount_points: []  # empty list = all mount points
+
+# Storage backend
+storage:
+  backend: "prometheus"  # prometheus, influxdb, or timescaledb
+  prometheus:
+    push_gateway: "http://localhost:9091"
+  influxdb:
+    url: "http://localhost:8086"
+    token: ""
+    org: "metrics"
+    bucket: "system_metrics"
+
+# Alert rules
+alerts:
+  enabled: true
+  rules:
+    - name: "High CPU Usage"
+      metric: "cpu_usage_percent"
+      condition: ">="
+      threshold: 80.0
+      duration: 300  # seconds (5 minutes)
+      severity: "warning"
+
+    - name: "Critical CPU Usage"
+      metric: "cpu_usage_percent"
+      condition: ">="
+      threshold: 95.0
+      duration: 60  # seconds
+      severity: "critical"
+
+    - name: "High Memory Usage"
+      metric: "memory_usage_percent"
+      condition: ">="
+      threshold: 85.0
+      duration: 60  # seconds
+      severity: "warning"
+
+    - name: "Critical Memory Usage"
+      metric: "memory_usage_percent"
+      condition: ">="
+      threshold: 95.0
+      duration: 60  # seconds
+      severity: "critical"
+
+# Notification channels
+notifications:
+  alertmanager:
+    enabled: true
+    url: "http://localhost:9093"
+
+  slack:
+    enabled: false
+    webhook_url: ""
+    channel: "#alerts"
+
+  discord:
+    enabled: false
+    webhook_url: ""
+
+# Logging
+logging:
+  level: "INFO"  # DEBUG, INFO, WARNING, ERROR, CRITICAL
+  file: "/var/log/metrics-collector.log"
+  max_size_mb: 100
+  backup_count: 5
